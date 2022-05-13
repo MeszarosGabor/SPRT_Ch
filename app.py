@@ -1,12 +1,20 @@
+# Standard library imports
 from datetime import datetime
 
+# Third party imports
 from flask import Flask, request
 from flask_restful import Api, Resource
+
+# Application Imports
+from language_moderator import moderate_entry
+
 
 app = Flask(__name__)
 api = Api(app)
 
+
 DATABASE = {}
+
 
 class BlogPostRegister(Resource):
     database = DATABASE
@@ -14,7 +22,8 @@ class BlogPostRegister(Resource):
     def post(self):
         blog_entry = request.json
         tstmp = datetime.utcnow().timestamp()
-        self.database[tstmp] = blog_entry
+        moderated_entry = moderate_entry(blog_entry)
+        self.database[tstmp] = moderated_entry
 
     def get(self):
         return self.database
