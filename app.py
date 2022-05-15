@@ -9,15 +9,10 @@ from flask_restful import Api, Resource
 from language_moderator import moderate_entry
 
 
-app = Flask(__name__)
-api = Api(app)
-
-
-DATABASE = {}
-
-
 class BlogPostRegister(Resource):
-    database = DATABASE
+    
+    def __init__(self, DATABASE):
+        self.database = DATABASE
 
     def post(self):
         blog_entry = request.json
@@ -29,10 +24,19 @@ class BlogPostRegister(Resource):
         return self.database
 
 
-def main():
-    api.add_resource(BlogPostRegister, "/posts/")
-    app.run(host="0.0.0.0")
+class BlogRunner:
+    def __init__(self):
+        self.database = {}
+
+    def run_service(self):
+        app = Flask(__name__)
+        api = Api(app)
+        api.add_resource(BlogPostRegister,
+                         "/posts/",
+                         resource_class_args=(self.database,))
+        app.run(host="0.0.0.0")
 
 
 if __name__ == "__main__":
-    main()
+    blog_runner = BlogRunner()
+    blog_runner.run_service()
