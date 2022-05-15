@@ -6,14 +6,14 @@ import gevent
 import requests
 
 
-MODERATOR_ENDPOINT = 'http://testingtestingtesting.com/'
+DEFAULT_MODERATOR_ENDPOINT = 'http://testingtestingtesting.com/'
 MODERATION_TIMEOUT_SEC = 5
 
 
 def moderate_sentence(sentence):
     data = {"fragment": sentence}
     try:
-        resp = requests.post(MODERATOR_ENDPOINT,
+        resp = requests.post(DEFAULT_MODERATOR_ENDPOINT,
                              json=data,
                              timeout=MODERATION_TIMEOUT_SEC)
         if resp.status_code != 200:
