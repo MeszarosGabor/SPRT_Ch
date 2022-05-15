@@ -2,16 +2,18 @@
 import requests
 
 
-MODERATOR_ENDPOINT = ""
+MODERATOR_ENDPOINT = 'http://testingtestingtesting.com/'
 MODERATION_TIMEOUT_SEC = 5
 
 
 def moderate_sentence(sentence):
     data = {"fragment": sentence}
     try:
-        resp = requests.post(MODERATOR_ENDPOINT,
-                             json=data,
-                             timeout=MODERATION_TIMEOUT_SEC)
+        # resp = requests.post(MODERATOR_ENDPOINT,
+        #                      json=data,
+        #                      timeout=MODERATION_TIMEOUT_SEC)
+        resp = requests.post(MODERATOR_ENDPOINT)
+        return resp
     except requests.exceptions.RequestException as e:
         return {"has_foul_language": None}
 
@@ -19,7 +21,7 @@ def moderate_sentence(sentence):
 def moderate_entry(entry):
     entry_has_foul = False
     for paragraph in entry["paragraphs"]:
-        sentence_has_foul = moderate_sentence(paragraph).get("has_foul_language")
+        sentence_has_foul = moderate_sentence(paragraph).json().get("has_foul_language")
         if sentence_has_foul:
             entry_has_foul = True
             break
