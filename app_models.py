@@ -3,6 +3,7 @@ from datetime import datetime
 
 from flask import Flask, request
 from flask_restful import Api, Resource
+from gevent.pywsgi import WSGIServer
 
 from language_moderator import moderate_entry
 
@@ -35,4 +36,6 @@ class BlogRunner:
         api.add_resource(BlogPostRegister,
                          "/posts/",
                          resource_class_args=(self.database, self.moderator_endpoint))
-        app.run(host=self.host, port=self.port)
+        http_server = WSGIServer((self.host, self.port), app)
+        print(f"Starting the main app at {self.host}:{self.port}...")
+        http_server.serve_forever()
