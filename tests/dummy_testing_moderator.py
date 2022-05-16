@@ -1,5 +1,12 @@
+# Standard library imports
+import logging
+
+# Third party imports
 from flask import Flask, request
 from flask_restful import Api, Resource
+
+
+logger = logging.getLogger()
 
 
 class TestModerator(Resource):
@@ -15,7 +22,7 @@ class TestModerator(Resource):
 
     def post(self):
         sentence = request.json.get("fragment")
-        print(f"Testing fragment: {sentence}")
+        logging.debug(f"Testing fragment: {sentence}")
         return {"has_foul_language": self.trigger_string in sentence.lower()}
 
 

@@ -1,9 +1,15 @@
+# Standard library imports
+import logging
+
 # Third party imports
 import click
 
 # Application Imports
 from app_models import BlogRunner
 from language_moderator import DUMMY_MODERATOR_ENDPOINT
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger()
 
 
 @click.command()

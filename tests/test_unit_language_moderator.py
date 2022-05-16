@@ -1,5 +1,7 @@
+# Standard library imports
 from copy import copy
 
+# Third party imports
 import pytest
 import responses
 
@@ -37,4 +39,3 @@ def test_moderate_entry_all_same(entry, api_resp, mocked_responses):
                   json={"has_foul_language": api_resp}, status=200)
     moderated = moderate_entry(entry)
     assert moderated.get("has_foul_language") == api_resp
-

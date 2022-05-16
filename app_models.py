@@ -1,11 +1,18 @@
 # Standard library imports
+import logging
 from datetime import datetime
 
+# Third party imports
 from flask import Flask, request
 from flask_restful import Api, Resource
 from gevent.pywsgi import WSGIServer
 
+# Application imports
 from language_moderator import moderate_entry
+
+
+logger = logging.getLogger()
+
 
 class BlogPostRegister(Resource):
     
@@ -37,5 +44,5 @@ class BlogRunner:
                          "/posts/",
                          resource_class_args=(self.database, self.moderator_endpoint))
         http_server = WSGIServer((self.host, self.port), app)
-        print(f"Starting the main app at {self.host}:{self.port}...")
+        logger.info(f"Starting the main app at {self.host}:{self.port}...")
         http_server.serve_forever()
