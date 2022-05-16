@@ -53,7 +53,7 @@ endpoint  http://localhost:5555/
 ## PROPOSED ADDITIONAL WORK
 - data persistence in Redis/ MySQL with JSON fields.
 - GET endpoint with title-search and regex match
-- Additional unit test coverage
+- Additional unit test coverage addressing timeouts, mixed responses etc.
 - Automated full functional testing with app context managers
 - Python3 type hinting inclusion
 - OpenAPI schema addition.

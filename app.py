@@ -11,7 +11,6 @@ import click
 
 # Application Imports
 from app_models import BlogRunner
-from language_moderator import DUMMY_MODERATOR_ENDPOINT
 
 
 logging.basicConfig(level=logging.INFO)
@@ -21,7 +20,7 @@ logger = logging.getLogger()
 @click.command()
 @click.option("--host", default="0.0.0.0", type=str)
 @click.option("--port", default=5000, type=int)
-@click.option("--moderator_endpoint", default=DUMMY_MODERATOR_ENDPOINT, type=str)
+@click.option("--moderator_endpoint", type=str)
 def main(host, port, moderator_endpoint):
     blog_runner = BlogRunner(host, port, moderator_endpoint)
     blog_runner.run_service()

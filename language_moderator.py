@@ -16,12 +16,11 @@ import requests
 
 logger = logging.getLogger()
 
-
-DUMMY_MODERATOR_ENDPOINT = 'http://testingtestingtesting.com/'  # dummy endpoint
+# TODO: could be CLI parameter.
 MODERATION_TIMEOUT_SEC = 5
 
 
-def moderate_sentence(sentence, moderator_endpoint=DUMMY_MODERATOR_ENDPOINT):
+def moderate_sentence(sentence, moderator_endpoint):
     """
     Calls the provided API and returns if a sentence contains foul words.
     """
@@ -38,7 +37,7 @@ def moderate_sentence(sentence, moderator_endpoint=DUMMY_MODERATOR_ENDPOINT):
         return {"has_foul_language": None}
 
 
-def moderate_entry(entry, moderator_endpoint=DUMMY_MODERATOR_ENDPOINT):
+def moderate_entry(entry, moderator_endpoint):
     """
     Calls the provided API and returns if a blog entry contains foul words.
     In case no foul sentence is found but not all sentences received
