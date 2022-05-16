@@ -4,6 +4,7 @@ A simple moderator service for testing purposes.
 
 # Standard library imports
 import logging
+from random import random
 
 # Third party imports
 from flask import Flask, request
@@ -18,6 +19,9 @@ class TestModerator(Resource):
     Test moderator that deems sentences foul if they
     contain the prescribed substring.
     """
+
+    RANDOM_FAILURE_PROBABILITY = 0.2
+
     def __init__(self, trigger_string):
         self.trigger_string = trigger_string
 
@@ -35,6 +39,8 @@ class TestModerator(Resource):
         """
         sentence = request.json.get("fragment")
         logging.debug(f"Testing fragment: {sentence}")
+        if random() < self.RANDOM_FAILURE_PROBABILITY:
+            return {"has_foul_language": None}
         return {"has_foul_language": self.trigger_string in sentence.lower()}
 
 
