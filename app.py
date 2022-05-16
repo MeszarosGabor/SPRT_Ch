@@ -1,5 +1,5 @@
 """
-This is the main runner of the Blog Backend Service.
+Main runner of the Blog Backend Service.
 Execute as a standalone script with specified CLI options.
 """
 

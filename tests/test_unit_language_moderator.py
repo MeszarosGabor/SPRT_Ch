@@ -1,3 +1,7 @@
+"""
+Unit test module targeting the entry moderation feature.
+"""
+
 # Standard library imports
 from copy import copy
 
@@ -11,10 +15,11 @@ from language_moderator import moderate_entry, moderate_sentence
 DUMMY_MODERATOR_ENDPOINT = 'http://testingtestingtesting.com/'
 
 
-@pytest.fixture                                                                    
-def mocked_responses():                                                            
-    with responses.RequestsMock() as rsps:                                         
-        yield rsps 
+@pytest.fixture
+def mocked_responses():
+    with responses.RequestsMock() as rsps:
+        yield rsps
+
 
 @pytest.fixture
 def entry():

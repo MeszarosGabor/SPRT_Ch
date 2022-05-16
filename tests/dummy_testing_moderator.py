@@ -26,11 +26,11 @@ class TestModerator(Resource):
         Mostly for verification of the service,
         this get endpoint provides a 'heartbeat'.
         """
-        return "I am up!"
+        return f"I am up! My trigger string is {self.trigger_string}"
 
     def post(self):
-        """ 
-        Returns if the given sentence contains the 
+        """
+        Returns if the given sentence contains the
         pre-described trigger word.
         """
         sentence = request.json.get("fragment")
@@ -44,7 +44,7 @@ class TestModeratorRunner:
         self.host = host
         self.port = port
         self.trigger_string = trigger_string
-       
+
     def run_service(self):
         app = Flask(__name__)
         api = Api(app)
