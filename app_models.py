@@ -21,10 +21,15 @@ class BlogPostRegister(Resource):
         self.moderator_endpoint = moderator_endpoint
 
     def post(self):
-        blog_entry = request.json
-        tstmp = int(datetime.utcnow().timestamp())
-        moderated_entry = moderate_entry(blog_entry, self.moderator_endpoint)
-        self.database[tstmp] = moderated_entry
+        try:
+            blog_entry = request.json
+            tstmp = int(datetime.utcnow().timestamp())
+            moderated_entry = moderate_entry(blog_entry, self.moderator_endpoint)
+            self.database[tstmp] = moderated_entry
+        except Exception as exc:
+            return {"status": "Failed", "exc": str(exc)}
+        else:
+            return {"status": "Success"}
 
     def get(self):
         return self.database
