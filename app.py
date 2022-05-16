@@ -1,3 +1,8 @@
+"""
+This is the main runner of the Blog Backend Service.
+Execute as a standalone script with specified CLI options.
+"""
+
 # Standard library imports
 import logging
 
@@ -7,6 +12,7 @@ import click
 # Application Imports
 from app_models import BlogRunner
 from language_moderator import DUMMY_MODERATOR_ENDPOINT
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()

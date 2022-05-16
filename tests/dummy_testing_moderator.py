@@ -1,3 +1,7 @@
+"""
+A simple moderator service for testing purposes.
+"""
+
 # Standard library imports
 import logging
 
@@ -18,15 +22,24 @@ class TestModerator(Resource):
         self.trigger_string = trigger_string
 
     def get(self):
+        """
+        Mostly for verification of the service,
+        this get endpoint provides a 'heartbeat'.
+        """
         return "I am up!"
 
     def post(self):
+        """ 
+        Returns if the given sentence contains the 
+        pre-described trigger word.
+        """
         sentence = request.json.get("fragment")
         logging.debug(f"Testing fragment: {sentence}")
         return {"has_foul_language": self.trigger_string in sentence.lower()}
 
 
 class TestModeratorRunner:
+    """ Main runner of the moderator service. """
     def __init__(self, host, port, trigger_string):
         self.host = host
         self.port = port

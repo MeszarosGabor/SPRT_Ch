@@ -1,3 +1,8 @@
+"""
+Language moderator utilily module; supports the utilization of the
+provided 3rd party moderator API on sentence and entry levels.
+"""
+
 from gevent import monkey
 monkey.patch_all()
 
@@ -17,6 +22,9 @@ MODERATION_TIMEOUT_SEC = 5
 
 
 def moderate_sentence(sentence, moderator_endpoint=DUMMY_MODERATOR_ENDPOINT):
+    """
+    Calls the provided API and returns if a sentence contains foul words.
+    """
     data = {"fragment": sentence}
     logger.debug(f"Received fragment {sentence}")
     try:
@@ -31,6 +39,14 @@ def moderate_sentence(sentence, moderator_endpoint=DUMMY_MODERATOR_ENDPOINT):
 
 
 def moderate_entry(entry, moderator_endpoint=DUMMY_MODERATOR_ENDPOINT):
+    """
+    Calls the provided API and returns if a blog entry contains foul words.
+    In case no foul sentence is found but not all sentences received
+    confirmation, the entry will be recorded as 'None' (= unknown).
+
+    NOTE: paragraphs are processed through parallel API calls for
+          performance reasons.
+    """
     logger.debug(f"RECEIVED ENTRY: {entry}")
     entry_has_foul = False
     moderator_greenlets = []

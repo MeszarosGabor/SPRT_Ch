@@ -55,4 +55,6 @@ endpoint  http://localhost:5555/
 - GET endpoint with title-search and regex match
 - Additional unit test coverage
 - Automated full functional testing with app context managers
+- Python3 type hinting inclusion
+- OpenAPI schema addition.
 
