@@ -50,9 +50,14 @@ class BlogPostRegister(Resource):
             return {"status": "Success"}
 
     def get(self):
-        """ Returns the db content as a JSON object """
-        # TODO: support per-title retrieval
-        return self.database
+        """
+        Returns the respective entry as a JSON object.
+        If no entry_id specified, it returns the entire collection.
+        """
+        entry_id = request.args.get('entry_id')
+        if not entry_id:
+            return self.database
+        return self.database.get(int(entry_id), {})
 
 
 class BlogRunner:

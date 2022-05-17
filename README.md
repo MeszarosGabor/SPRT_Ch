@@ -29,7 +29,7 @@ endpoint  http://localhost:5555/
 
 $ curl -X POST -H 'Content-Type: application/json' -d '{"title":"foo","paragraphs":["par1","par2"]}'  "http://localhost:6006/posts/"
 
-[GET] <host>/posts/: return the dictionary content of the so far registered entries.
+[GET] <host>/posts/?entry_id=<id>: returns the dictionary content of the respective id (the timestamp of the insertion). If no id is provided, the whole collection of entries is returned. In case of non-existent key, an empty dictionary is returned.
 
 
 ## TESTING
